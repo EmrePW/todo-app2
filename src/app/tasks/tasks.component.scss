@@ -1,0 +1,87 @@
+@import url(../../colors.css);
+
+.task {
+  padding: 1.5rem 2rem;
+  border-bottom: 2px solid var(--clr-neutral-theme_dark-very-dark-greyish-blue);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.left {
+  display: flex;
+  align-items: center;
+  flex-basis: 90%;
+  overflow: hidden;
+}
+
+.task_name {
+  color: var(--clr-neutral-theme_dark-light-greyish-blue);
+  font-size: 1.25rem;
+  cursor: pointer;
+  overflow-wrap: normal;
+  max-width: 80%;
+}
+
+.check-button {
+  padding: 1rem;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  margin-right: 1rem;
+  cursor: pointer;
+  background: linear-gradient(
+        var(--clr-neutral-theme_dark-very-dark-desaturated-blue),
+        var(--clr-neutral-theme_dark-very-dark-desaturated-blue)
+      )
+      padding-box,
+    linear-gradient(
+        var(--clr-neutral-theme_dark-dark-greyish-blue),
+        var(--clr-neutral-theme_dark-dark-greyish-blue)
+      )
+      border-box;
+  position: relative;
+}
+
+.check-button:hover {
+  background: linear-gradient(
+        var(--clr-neutral-theme_dark-very-dark-desaturated-blue),
+        var(--clr-neutral-theme_dark-very-dark-desaturated-blue)
+      )
+      padding-box,
+    linear-gradient(90deg, rgba(87, 221, 255, 1) 0%, rgba(192, 88, 243, 1) 100%)
+      border-box;
+}
+
+.check-button.completed {
+  background: linear-gradient(
+      90deg,
+      rgba(87, 221, 255, 1) 0%,
+      rgba(192, 88, 243, 1) 100%
+    )
+    border-box;
+}
+
+.check-button > img {
+  position: absolute;
+  top: 50;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.task > button {
+  display: block;
+  background-color: transparent;
+  border: 0;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+.task > button > img {
+  width: 1.5rem;
+}
+
+.completed-task {
+  color: var(--clr-neutral-theme_dark-dark-greyish-blue);
+  text-decoration: line-through;
+}

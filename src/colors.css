@@ -1,0 +1,24 @@
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap");
+
+:root {
+  --clr-primary-bright-blue: hsl(220, 98%, 61%);
+
+  --clr-neutral-theme_light-very-light-gray: hsl(0, 0%, 98%);
+  --clr-neutral-theme_light-very-light-grayish-blue: hsl(236, 33%, 92%);
+  --clr-neutral-theme_light-light-grayish-blue: hsl(233, 11%, 84%);
+  --clr-neutral-theme_light-dark-grayish-blue: hsl(236, 9%, 61%);
+  --clr-neutral-theme_light-very-dark-grayish-blue: hsl(235, 19%, 35%);
+
+  --clr-neutral-theme_dark-very-dark-blue: hsl(235, 21%, 11%);
+  --clr-neutral-theme_dark-very-dark-desaturated-blue: hsl(235, 24%, 19%);
+  --clr-neutral-theme_dark-light-greyish-blue: hsl(234, 39%, 85%);
+  --clr-neutral-theme_dark-light-greyish-blue-hover: hsl(236, 33%, 92%);
+  --clr-neutral-theme_dark-dark-greyish-blue: hsl(234, 11%, 52%);
+  --clr-neutral-theme_dark-very-dark-greyish-blue: hsl(233, 14%, 35%);
+  --clr-neutral-theme_dark-very-dark-greyish-blue-alt: hsl(237, 14%, 26%);
+
+  --font-size: 18px;
+  --font-family: "Josefin Sans", sans-serif;
+  --fw-regular: 400;
+  --fw-bold: 700;
+}
