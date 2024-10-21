@@ -54,7 +54,7 @@ main {
 }
 
 .search-bar > button {
-  padding: 0.75rem;
+  padding: 1rem;
   border-radius: 50%;
   border: 0;
   background-color: transparent;
@@ -78,60 +78,12 @@ main {
   box-shadow: 0px 67px 130px -10px rgba(28, 28, 28, 1);
 }
 
-.navigation {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  padding: 1rem;
-}
-
-.navigation > p {
-  color: var(--clr-neutral-theme_dark-dark-greyish-blue);
-}
-
-.nav-button {
-  background: 0;
-  border: 0;
-  padding: 0.5rem 0.75rem;
-  color: var(--clr-neutral-theme_dark-dark-greyish-blue);
-  cursor: pointer;
-}
-
-.nav-button:hover {
-  color: var(--clr-neutral-theme_dark-light-greyish-blue-hover);
-}
-
-.nav-button.active {
-  color: var(--clr-primary-bright-blue);
-}
-
 .dd-info {
   text-align: center;
   color: var(--clr-neutral-theme_dark-very-dark-greyish-blue);
 }
-
-.mobile-nav {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  padding: 0.5rem;
-  background-color: var(--clr-neutral-theme_dark-very-dark-desaturated-blue);
-  border-radius: 0.5rem;
-}
 @media screen and (min-width: 768px) {
   main {
     background-image: url("../../../public/bg-desktop-dark.jpg");
-  }
-
-  .mobile-nav {
-    display: none;
-  }
-}
-
-@media screen and (max-width: 768px) {
-  .desktop-nav {
-    display: none;
   }
 }

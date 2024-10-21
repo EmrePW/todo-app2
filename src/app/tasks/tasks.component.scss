@@ -41,32 +41,36 @@
       )
       border-box;
   position: relative;
-}
 
-.check-button:hover {
-  background: linear-gradient(
-        var(--clr-neutral-theme_dark-very-dark-desaturated-blue),
-        var(--clr-neutral-theme_dark-very-dark-desaturated-blue)
+  &:hover {
+    background: linear-gradient(
+          var(--clr-neutral-theme_dark-very-dark-desaturated-blue),
+          var(--clr-neutral-theme_dark-very-dark-desaturated-blue)
+        )
+        padding-box,
+      linear-gradient(
+          90deg,
+          rgba(87, 221, 255, 1) 0%,
+          rgba(192, 88, 243, 1) 100%
+        )
+        border-box;
+  }
+
+  &.completed {
+    background: linear-gradient(
+        90deg,
+        rgba(87, 221, 255, 1) 0%,
+        rgba(192, 88, 243, 1) 100%
       )
-      padding-box,
-    linear-gradient(90deg, rgba(87, 221, 255, 1) 0%, rgba(192, 88, 243, 1) 100%)
       border-box;
-}
+  }
 
-.check-button.completed {
-  background: linear-gradient(
-      90deg,
-      rgba(87, 221, 255, 1) 0%,
-      rgba(192, 88, 243, 1) 100%
-    )
-    border-box;
-}
-
-.check-button > img {
-  position: absolute;
-  top: 50;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  & > img {
+    position: absolute;
+    top: 50;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
 }
 
 .task > button {
@@ -84,4 +88,55 @@
 .completed-task {
   color: var(--clr-neutral-theme_dark-dark-greyish-blue);
   text-decoration: line-through;
+}
+
+.navigation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 1rem;
+}
+
+.navigation > p {
+  color: var(--clr-neutral-theme_dark-dark-greyish-blue);
+}
+
+.nav-button {
+  background: 0;
+  border: 0;
+  padding: 0.5rem 0.75rem;
+  color: var(--clr-neutral-theme_dark-dark-greyish-blue);
+  cursor: pointer;
+  transition: color 0.2s linear;
+}
+
+.nav-button:hover {
+  color: var(--clr-neutral-theme_dark-light-greyish-blue-hover);
+}
+
+.nav-button.active {
+  color: var(--clr-primary-bright-blue);
+}
+
+.mobile-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0.5rem;
+  background-color: var(--clr-neutral-theme_dark-very-dark-desaturated-blue);
+  border-radius: 0.5rem;
+}
+
+@media screen and (min-width: 768px) {
+  .mobile-nav {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .desktop-nav {
+    display: none;
+  }
 }
