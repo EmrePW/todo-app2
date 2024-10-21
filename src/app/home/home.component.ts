@@ -18,14 +18,8 @@ import { TaskServiceService } from '../task-service.service';
           </button>
         </section>
         <section class="tasks">
-          <section class="search-bar">
-            <button type="button"></button>
-            <input type="text" placeholder="Create a new todo..." />
-          </section>
-          <section class="tasks-wrapper">
-            <app-tasks></app-tasks>
-            <!-- <app-tasks (updateActiveCount)="updateActiveTasks()"></app-tasks> -->
-          </section>
+          <app-tasks></app-tasks>
+          <!-- <app-tasks (updateActiveCount)="updateActiveTasks()"></app-tasks> -->
         </section>
 
         <section class="dd-info">

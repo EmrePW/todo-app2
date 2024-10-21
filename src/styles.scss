@@ -68,3 +68,17 @@ h6 {
 #__next {
   isolation: isolate;
 }
+
+/* bg and bg-image*/
+body {
+  background-color: var(--clr-neutral-theme_dark-very-dark-blue);
+  background-image: url("../public/bg-desktop-dark.jpg");
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+
+@media screen and (max-width: 768px) {
+  body {
+    background-image: url("../public/bg-mobile-dark.jpg");
+  }
+}

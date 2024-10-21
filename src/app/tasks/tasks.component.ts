@@ -1,4 +1,11 @@
-import { Component, inject, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  inject,
+  Output,
+  EventEmitter,
+  ViewChild,
+  ElementRef,
+} from '@angular/core';
 import { Task } from '../task';
 import { CommonModule } from '@angular/common';
 import { TaskServiceService } from '../task-service.service';
@@ -8,61 +15,76 @@ import { TaskServiceService } from '../task-service.service';
   standalone: true,
   imports: [CommonModule],
   template: `
-    <section *ngFor="let task of tasks" class="task">
-      <div class="left">
-        <button
-          type="button"
-          [class]="['check-button', this.task.status ? 'completed' : '']"
-          (click)="changeState(task.id)"
-        >
-          <img
-            src="/icon-check.svg"
-            alt=""
-            [style]="!this.task.status ? 'display:none' : ''"
-          />
-        </button>
-        <p
-          [class]="['task_name', this.task.status ? 'completed-task' : '']"
-          (click)="changeState(task.id)"
-        >
-          {{ task.name }}
-        </p>
-      </div>
-      <button type="button" (click)="removeTask(task.id)">
-        <img src="/icon-cross.svg" alt="" />
-      </button>
+    <section class="search-bar">
+      <button type="button"></button>
+      <input
+        type="text"
+        placeholder="Create a new todo..."
+        (keyup.enter)="createTask()"
+        #taskName
+      />
     </section>
-    <section class="navigation">
-      <p>
-        {{ activeTaskNumber }}
-        items left.
-      </p>
-      <nav class="desktop-nav">
-        <button
-          type="button"
-          [class]="['nav-button', allActive ? 'active' : '']"
-          (click)="showAll()"
-        >
-          All
+    <section class="tasks-wrapper">
+      <section *ngFor="let task of tasks" class="task">
+        <div class="left">
+          <button
+            type="button"
+            [class]="['check-button', this.task.status ? 'completed' : '']"
+            (click)="changeState(task.id)"
+          >
+            <img
+              src="/icon-check.svg"
+              alt=""
+              [style]="!this.task.status ? 'display:none' : ''"
+            />
+          </button>
+          <p
+            [class]="['task_name', this.task.status ? 'completed-task' : '']"
+            (click)="changeState(task.id)"
+          >
+            {{ task.name }}
+          </p>
+        </div>
+        <button type="button" (click)="removeTask(task.id)">
+          <img src="/icon-cross.svg" alt="" />
         </button>
-        <button
-          type="button"
-          [class]="['nav-button', activeActive ? 'active' : '']"
-          (click)="showActive()"
-        >
-          Active
+      </section>
+      <section class="navigation">
+        <p *ngIf="activeTaskNumber > 1">
+          {{ activeTaskNumber }}
+          items left.
+        </p>
+        <p *ngIf="activeTaskNumber == 1">
+          {{ activeTaskNumber }}
+          item left.
+        </p>
+        <nav class="desktop-nav">
+          <button
+            type="button"
+            [class]="['nav-button', allActive ? 'active' : '']"
+            (click)="showAll()"
+          >
+            All
+          </button>
+          <button
+            type="button"
+            [class]="['nav-button', activeActive ? 'active' : '']"
+            (click)="showActive()"
+          >
+            Active
+          </button>
+          <button
+            type="button"
+            [class]="['nav-button', completedActive ? 'active' : '']"
+            (click)="showCompleted()"
+          >
+            Completed
+          </button>
+        </nav>
+        <button type="button" class="nav-button" (click)="clearCompleted()">
+          Clear Completed
         </button>
-        <button
-          type="button"
-          [class]="['nav-button', completedActive ? 'active' : '']"
-          (click)="showCompleted()"
-        >
-          Completed
-        </button>
-      </nav>
-      <button type="button" class="nav-button" (click)="clearCompleted()">
-        Clear Completed
-      </button>
+      </section>
     </section>
     <nav class="mobile-nav">
       <button type="button" class="nav-button">All</button>
@@ -77,6 +99,7 @@ export class TasksComponent {
   // @Output() updateActiveCount = new EventEmitter<number>();
   taskService: TaskServiceService = inject(TaskServiceService);
   tasks: Task[] | null;
+  @ViewChild('taskName') input: ElementRef | undefined;
   activeTaskNumber: number;
   allActive: boolean = true;
   completedActive: boolean = false;
@@ -97,19 +120,18 @@ export class TasksComponent {
     localStorage.setItem('tasks', JSON.stringify(this.tasks)); // update localStorage
     this.taskService.tasks.next(this.tasks); // update behaviour object. (this.taskService.tasks)
 
-    this.taskService.activeTaskCount.next(
-      this.tasks?.filter((prd) => prd.status !== true).length ?? 0
-    );
-    this.activeTaskNumber = this.taskService.activeTaskCount.value ?? 0;
+    this.activeTaskNumber = this.findActiveTaskCount();
+    this.taskService.activeTaskCount.next(this.activeTaskNumber);
     // this.updateActiveCount.emit();
   }
 
   removeTask(id: number) {
     this.tasks = this.tasks?.filter((prd) => prd.id != id) ?? [];
+
     localStorage.setItem('tasks', JSON.stringify(this.tasks));
     this.taskService.tasks.next(this.tasks);
-    this.activeTaskNumber =
-      this.tasks?.filter((prd) => prd.status !== true).length ?? 0;
+    this.activeTaskNumber = this.findActiveTaskCount();
+    this.taskService.activeTaskCount.next(this.activeTaskNumber);
   }
 
   clearCompleted() {
@@ -142,5 +164,25 @@ export class TasksComponent {
     this.allActive = false;
     this.activeActive = false;
     this.completedActive = true;
+  }
+
+  createTask(): void {
+    let newTaskName: string = this.input?.nativeElement.value ?? '';
+    console.log(newTaskName?.trim());
+    let newTask: Task = {
+      id: Math.floor(Math.random() * 1000),
+      name: newTaskName,
+      status: false,
+    };
+
+    this.tasks?.push(newTask);
+    localStorage.setItem('tasks', JSON.stringify(this.tasks));
+    this.taskService.tasks.next(this.tasks);
+    this.activeTaskNumber = this.findActiveTaskCount();
+    this.taskService.activeTaskCount.next(this.activeTaskNumber);
+  }
+
+  findActiveTaskCount(): number {
+    return this.tasks?.filter((prd) => prd.status !== true).length ?? 0;
   }
 }

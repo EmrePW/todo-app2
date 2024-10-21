@@ -1,5 +1,42 @@
 @import url(../../colors.css);
 
+.search-bar {
+  padding: 1.5rem 2rem;
+  background-color: var(--clr-neutral-theme_dark-very-dark-desaturated-blue);
+  margin-bottom: 2rem;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1rem;
+}
+
+.search-bar > button {
+  padding: 1rem;
+  border-radius: 50%;
+  border: 0;
+  background-color: transparent;
+  outline: 2px solid var(--clr-neutral-theme_dark-dark-greyish-blue);
+}
+
+.search-bar > input[type="text"] {
+  background-color: transparent;
+  border: 0;
+  outline: 0;
+  color: var(--clr-neutral-theme_dark-dark-greyish-blue);
+  font-size: 1.5rem;
+  width: 100%;
+}
+
+.tasks-wrapper {
+  border-radius: 0.5rem;
+  background-color: var(--clr-neutral-theme_dark-very-dark-desaturated-blue);
+  margin-bottom: 2rem;
+  -webkit-box-shadow: 0px 67px 130px -10px rgba(28, 28, 28, 1);
+  -moz-box-shadow: 0px 67px 130px -10px rgba(28, 28, 28, 1);
+  box-shadow: 0px 67px 130px -10px rgba(28, 28, 28, 1);
+}
+
 .task {
   padding: 1.5rem 2rem;
   border-bottom: 2px solid var(--clr-neutral-theme_dark-very-dark-greyish-blue);
